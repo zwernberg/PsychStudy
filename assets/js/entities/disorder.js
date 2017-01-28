@@ -1,7 +1,12 @@
 PsychManager.module("Entities", function(Entities, PsychManager, Backbone, Marionette, $, _){
     var disorders;
     
-    Entities.Disorder = Backbone.Model.extend({});
+    Entities.Disorder = Backbone.Model.extend({
+        defaults: {
+            "disorder":   "",
+            "attribute":     "",
+        }
+    });
     Entities.DisorderCollection = Backbone.Collection.extend({
         model: Entities.Disorder
     });

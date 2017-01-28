@@ -7,7 +7,7 @@
 
 
     showDisorder: function(){
-        //$("ul").find("[data-attribute='" + this.model.get('disorder') + "']").removeClass("hidden");
+        //this.$("[data-attribute=" + this.model.get('disorder') + "]").removeClass("hidden");
         alert(this.model.get('disorder'));
     }
 

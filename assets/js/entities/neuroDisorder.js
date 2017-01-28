@@ -1,7 +1,12 @@
 PsychManager.module("Entities", function(Entities, PsychManager, Backbone, Marionette, $, _){
     var neuroDisorders;
 
-    Entities.neuroDisorder = Backbone.Model.extend({});
+    Entities.neuroDisorder = Backbone.Model.extend({
+        defaults: {
+            "disorder":   "",
+            "attribute":     "",
+        }
+    });
     Entities.neuroDisorderCollection = Backbone.Collection.extend({
         model: Entities.neuroDisorder
     });
@@ -213,7 +218,7 @@ PsychManager.module("Entities", function(Entities, PsychManager, Backbone, Mario
                 attribute: "Vascular Dementia"
             },
             {
-                disease: "Dementia",
+                disorder: "Dementia",
                 attribute: "Dementia with Lewy Bodies"
             },
             {
