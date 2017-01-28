@@ -1,17 +1,80 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title>Title</title>
-
-
+  <meta charset="utf-8">
+  <title>Marionette Contact Manager</title>
+  <link href="./assets/css/bootstrap.css" rel="stylesheet">
+  <link href="./assets/css/application.css" rel="stylesheet">
 </head>
 
 <body>
-  <b>Psychiatric Disorders</b>
-<ul id="localFiles">
 
-</ul>
-</body>
-</html>
-<script src="scripts.js"></script>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <span class="brand">Psych Study Manager</span>
+      </div>
+    </div>
+  </div>
+<div id="app-container">
+  <h4> Disorders</h4>
+  <div id="disorder-region" class="container">
+    <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
+  </div>
+  <h4> Neuro Disorders</h4>
+  <div id="neuroDisorder-region" class="container">
+    <p>Here is static content in the web page. You'll notice that it gets replaced by our app as soon as we start it.</p>
+  </div>
+</div>
+
+  <script type="text/templace" id="disorder-list-item">
+      <td data-attribute= "<%- attribute %>" class="disorder hidden"><%- disorder %></td>
+      <td><%- attribute %></td>
+      <td> 
+        <button class="btn btn-primary js-delete">
+          Show
+        </button>
+      </td>
+  </script>
+
+  <script type="text/template" id="disorder-list">
+  <thead>
+    <tr>
+      <th>Attibute</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</script>
+
+<script src="./assets/js/vendor/jquery.js"></script>
+<script src="./assets/js/vendor/json2.js"></script>
+<script src="./assets/js/vendor/underscore.js"></script>
+<script src="./assets/js/vendor/backbone.js"></script>
+<script src="./assets/js/vendor/backbone.marionette.js"></script>
+<script src="./assets/js/app.js"></script>
+<script src="./assets/js/entities/disorder.js"></script>
+<script src="./assets/js/entities/neuroDisorder.js"></script>
+<script src="./assets/js/views/list_view.js"></script>
+<script type="text/javascript">
+
+  PsychManager.on("start", function () {
+    var disorders = PsychManager.request("disorder:entities");
+    disorders.reset(disorders.shuffle(), {silent: true});
+    var disordersListView = new PsychManager.DisorderView({
+      collection: disorders
+    });
+
+    var neuroDisorders = PsychManager.request("neuroDisorder:entities");
+    neuroDisorders.reset(neuroDisorders.shuffle(), {silent:true});
+    var neuroDisordersListView = new PsychManager.DisorderView({
+      collection: neuroDisorders
+    });
+
+    PsychManager.regions.main.show(disordersListView);
+    PsychManager.regions.neuro.show(neuroDisordersListView);
+  });
+
+  PsychManager.start();
+</script>
