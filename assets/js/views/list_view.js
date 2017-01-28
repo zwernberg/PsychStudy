@@ -18,5 +18,13 @@
     className: "table table-hover",
     template: "#disorder-list",
     childView: PsychManager.DisorderItemView,
-    childViewContainer: "tbody"
+    childViewContainer: "tbody",
+
+    events : {
+        "click button.js-shuffle": "shuffleCollection"
+    },
+    
+    shuffleCollection: function(){
+         this.collection.reset(this.collection.shuffle(), {silent:false});
+    }
   });
